@@ -267,4 +267,22 @@ public class RNSendIntentModule extends ReactContextBaseJavaModule {
         this.reactContext.startActivity(sendIntent);
       }
     }
+
+    @ReactMethod
+    public void sendWhatsApp(String text, String type) {
+      final Intent sendIntent = this.getSendIntent(text, type);
+      sendIntent.setAction(Intent.ACTION_SEND);
+      sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+      sendIntent.setType(type);
+      sendIntent.setPackage("com.whatsapp");
+
+      //Check that an app exists to receive the intent
+      if (sendIntent.resolveActivity(this.reactContext.getPackageManager()) != null) {
+        this.reactContext.runOnUiQueueThread(new Runnable(){
+            public void run(){
+                reactContext.startActivity(sendIntent);
+            }
+        });
+      }
+    }
 }
