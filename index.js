@@ -20,6 +20,9 @@ var SendIntentAndroid = {
             RNSendIntentAndroid.sendText(config.text, (config.type||"text/plain"));
         }
     },
+    sendWhatsApp(config) {
+        RNSendIntentAndroid.sendWhatsApp(config.text, (config.type||"text/plain"));
+    },
     sendPhoneCall(phoneNumber) {
         RNSendIntentAndroid.sendPhoneCall(phoneNumber);
     },
